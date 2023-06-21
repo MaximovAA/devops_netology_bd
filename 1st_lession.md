@@ -36,7 +36,7 @@ CAP-теореме. Какой классификации по CAP-теорем�
 Согласно PACELC-теореме как бы вы классифицировали эти реализации?
 
 ```
-- CP (consistency + partition tolerance – availability)
+- AP (availability + partition tolerance – consistency)
 - CA (availability + consistency – partition tolerance)
 - CP (consistency + partition tolerance – availability)
 
