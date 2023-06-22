@@ -4,7 +4,7 @@
 в который будут складываться данные БД и бэкапы.
 
 Приведите получившуюся команду или docker-compose-манифест.
-```
+```Yaml
 root@sqlvm:~/.docker/cli-plugins# cat postgre.yml
 # Use postgres/example user/password credentials
 version: '3.1'
