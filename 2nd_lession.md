@@ -5,7 +5,33 @@
 
 Приведите получившуюся команду или docker-compose-манифест.
 ```
-https://hub.docker.com/_/postgres
+root@sqlvm:~/.docker/cli-plugins# cat postgre.yml
+# Use postgres/example user/password credentials
+version: '3.1'
+
+
+services:
+
+  db:
+    image: postgres:12
+    volumes:
+      - /home/amaksimov/base:/base
+      - /home/amaksimov/backup:/backup
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 12345
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+volumes:
+  base:
+  backup:
+root@sqlvm:~/.docker/cli-plugins#
+
 ```
 
 ## Задача 2
