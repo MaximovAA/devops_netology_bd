@@ -21,7 +21,7 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: 12345
-
+      PGDATA: /base
   adminer:
     image: adminer
     restart: always
@@ -30,7 +30,6 @@ services:
 volumes:
   base:
   backup:
-root@sqlvm:~/.docker/cli-plugins#
 
 ```
 
