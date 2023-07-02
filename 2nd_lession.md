@@ -64,6 +64,69 @@ volumes:
 - список пользователей с правами над таблицами test_db.
 
 ```
+1. test_db=# \l
+                             List of databases
+   Name    | Owner | Encoding |  Collate   |   Ctype    | Access privileges
+-----------+-------+----------+------------+------------+-------------------
+ admin     | admin | UTF8     | en_US.utf8 | en_US.utf8 |
+ postgres  | admin | UTF8     | en_US.utf8 | en_US.utf8 |
+ template0 | admin | UTF8     | en_US.utf8 | en_US.utf8 | =c/admin         +
+           |       |          |            |            | admin=CTc/admin
+ template1 | admin | UTF8     | en_US.utf8 | en_US.utf8 | =c/admin         +
+           |       |          |            |            | admin=CTc/admin
+ test_db   | admin | UTF8     | en_US.utf8 | en_US.utf8 |
+(5 rows)
+
+2. test_db=# \dt+
+                    List of relations
+ Schema |  Name   | Type  | Owner |  Size   | Description
+--------+---------+-------+-------+---------+-------------
+ public | clients | table | admin | 0 bytes |
+ public | orders  | table | admin | 0 bytes |
+(2 rows)
+
+3. SELECT table_catalog,table_name,grantee,privilege_type FROM information_schema.table_privileges WHERE table_schema NOT IN ('information_schema','pg_catalog');
+
+4. test_db=# SELECT table_catalog,table_name,grantee,privilege_type FROM information_schema.table_privileges WHERE table_schema NOT IN ('information_schema','pg_catalog');
+ table_catalog | table_name |     grantee      | privilege_type
+---------------+------------+------------------+----------------
+ test_db       | orders     | admin            | INSERT
+ test_db       | orders     | admin            | SELECT
+ test_db       | orders     | admin            | UPDATE
+ test_db       | orders     | admin            | DELETE
+ test_db       | orders     | admin            | TRUNCATE
+ test_db       | orders     | admin            | REFERENCES
+ test_db       | orders     | admin            | TRIGGER
+ test_db       | clients    | admin            | INSERT
+ test_db       | clients    | admin            | SELECT
+ test_db       | clients    | admin            | UPDATE
+ test_db       | clients    | admin            | DELETE
+ test_db       | clients    | admin            | TRUNCATE
+ test_db       | clients    | admin            | REFERENCES
+ test_db       | clients    | admin            | TRIGGER
+ test_db       | orders     | test-admin-user  | INSERT
+ test_db       | orders     | test-admin-user  | SELECT
+ test_db       | orders     | test-admin-user  | UPDATE
+ test_db       | orders     | test-admin-user  | DELETE
+ test_db       | orders     | test-admin-user  | TRUNCATE
+ test_db       | orders     | test-admin-user  | REFERENCES
+ test_db       | orders     | test-admin-user  | TRIGGER
+ test_db       | clients    | test-admin-user  | INSERT
+ test_db       | clients    | test-admin-user  | SELECT
+ test_db       | clients    | test-admin-user  | UPDATE
+ test_db       | clients    | test-admin-user  | DELETE
+ test_db       | clients    | test-admin-user  | TRUNCATE
+ test_db       | clients    | test-admin-user  | REFERENCES
+ test_db       | clients    | test-admin-user  | TRIGGER
+ test_db       | orders     | test-simple-user | INSERT
+ test_db       | orders     | test-simple-user | SELECT
+ test_db       | orders     | test-simple-user | UPDATE
+ test_db       | orders     | test-simple-user | DELETE
+ test_db       | clients    | test-simple-user | INSERT
+ test_db       | clients    | test-simple-user | SELECT
+ test_db       | clients    | test-simple-user | UPDATE
+ test_db       | clients    | test-simple-user | DELETE
+(36 rows)
 
 ```
 
