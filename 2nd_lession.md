@@ -202,6 +202,17 @@ test_db=# select count(*) from orders;
 Подсказка: используйте директиву `UPDATE`.
 
 ```
+UPDATE clients SET Заказ = (SELECT id FROM orders WHERE "Наименование" = 'Книга') WHERE "Фамилия" = 'Иванов Иван Иванович';
+UPDATE clients SET Заказ = (SELECT id FROM orders WHERE "Наименование" = 'Монитор') WHERE "Фамилия" = 'Петров Петр Петрович';
+UPDATE clients SET Заказ = (SELECT id FROM orders WHERE "Наименование" = 'Гитара') WHERE "Фамилия" = 'Иоганн Себастьян Бах';
+
+test_db=# select * from clients where Заказ IS NOT Null;
+ id |       Фамилия        | Страна проживания | Заказ
+----+----------------------+-------------------+-------
+  1 | Иванов Иван Иванович | USA               |     3
+  2 | Петров Петр Петрович | USA               |     4
+  3 | Иоганн Себастьян Бах | Japan             |     5
+(3 rows)
 
 ```
 
