@@ -255,5 +255,57 @@ test_db=# EXPLAIN SELECT * FROM clients;
 Приведите список операций, который вы применяли для бэкапа данных и восстановления. 
 
 ```
+pg_dump -U admin test_db > /backup/test_db.sql
+
+root@642e04d6a02e:/backup# psql -U admin -d test_db -f /backup/test_db.sql
+SET
+SET
+SET
+SET
+SET
+ set_config
+------------
+
+(1 row)
+
+SET
+SET
+SET
+SET
+SET
+SET
+CREATE TABLE
+ALTER TABLE
+CREATE SEQUENCE
+ALTER TABLE
+ALTER SEQUENCE
+CREATE TABLE
+ALTER TABLE
+CREATE SEQUENCE
+ALTER TABLE
+ALTER SEQUENCE
+ALTER TABLE
+ALTER TABLE
+COPY 5
+COPY 5
+ setval
+--------
+      7
+(1 row)
+
+ setval
+--------
+      5
+(1 row)
+
+ALTER TABLE
+ALTER TABLE
+CREATE INDEX
+ALTER TABLE
+GRANT
+GRANT
+GRANT
+GRANT
+root@642e04d6a02e:/backup#
 
 ```
