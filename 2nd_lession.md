@@ -165,6 +165,21 @@ volumes:
     - результаты их выполнения.
 
 ```
+INSERT INTO orders (Наименование, Цена) VALUES ('Шоколад', 10), ('Принтер', 3000), ('Книга', 500), ('Монитор', 7000), ('Гитара', 4000);
+
+INSERT INTO clients (Фамилия, "Страна проживания") VALUES ('Иванов Иван Иванович', 'USA'), ('Петров Петр Петрович', 'USA'), ('Иоганн Себастьян Бах', 'Japan'), ('Ронни Джеймс Дио', 'Russia'), ('Ritchie Blackmore', 'Russia');
+
+test_db=# select count(*) from clients;
+ count
+-------
+     5
+(1 row)
+
+test_db=# select count(*) from orders;
+ count
+-------
+     5
+(1 row)
 
 ```
 
