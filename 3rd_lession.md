@@ -105,7 +105,39 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_ATTRIBUTES WHERE User='test';
 - на `MyISAM`,
 - на `InnoDB`.
 
-```
+```SQL
+set profiling=1;
+select * from test_db.orders;
+show profiles;
+
+mysql> SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'test_db';
++--------+
+| ENGINE |
++--------+
+| InnoDB |
++--------+
+1 row in set (0.00 sec)
+
+mysql> show profiles;
++----------+------------+------------------------------+
+| Query_ID | Duration   | Query                        |
++----------+------------+------------------------------+
+|        1 | 0.00062075 | select * from test_db.orders |
++----------+------------+------------------------------+
+
+
+ALTER TABLE test_db.orders ENGINE=MyISAM;
+
+mysql> show profiles;
++----------+------------+------------------------------------------+
+| Query_ID | Duration   | Query                                    |
++----------+------------+------------------------------------------+
+|        1 | 0.00062075 | select * from test_db.orders             |
+|        2 | 0.01789175 | ALTER TABLE test_db.orders ENGINE=MyISAM |
+|        3 | 0.00046125 | select * from test_db.orders             |
++----------+------------+------------------------------------------+
+3 rows in set, 1 warning (0.00 sec)
+
 
 ```
 
