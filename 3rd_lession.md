@@ -35,6 +35,10 @@ services:
       MYSQL_DATABASE: test_db
       MYSQL_USER: admin
       MYSQL_PASSWORD: 12345
+volumes:
+  base:
+  backup:
+
 ```
 ```SQL
 mysql -u admin -p test_db < /backup/test_dump.sql
