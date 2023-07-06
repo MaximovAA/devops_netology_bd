@@ -166,6 +166,8 @@ mysql> show profiles;
 Приведите в ответе изменённый файл `my.cnf`.  
 
 ```
+Для выполнения требуемых условий необходимо прописать в конфиг следующие параметры:
+
 innodb_file_per_table=1
 innodb_log_buffer_size=1M
 innodb_buffer_pool_size=2,4G
