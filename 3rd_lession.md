@@ -166,14 +166,13 @@ mysql> show profiles;
 Приведите в ответе изменённый файл `my.cnf`.  
 
 ```
-innodb_buffer_pool_instances    = 4     # Use 1 instance per 1GB of InnoDB pool size - max is 64
-innodb_buffer_pool_size         = 4G    # Use up to 70-80% of RAM
-innodb_file_per_table           = 1
-innodb_flush_log_at_trx_commit  = 0
-innodb_flush_method             = O_DIRECT
-innodb_log_buffer_size          = 16M
-innodb_log_file_size            = 1G
-innodb_sort_buffer_size         = 4M    # UPD - Defines how much data is read into memory for sorting operations before writing to disk (default is 1M / max is 64M)
-innodb_stats_on_metadata        = 0
+innodb_file_per_table=1
+innodb_log_buffer_size=1M
+innodb_buffer_pool_size=2,4G
+innodb_log_file_size=100M
+innodb_flush_method = O_DIRECT
+tmpdir = /dev/shm
+table_cache = 4096
+table_definition_cache = 4096
 ```
 
