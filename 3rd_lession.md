@@ -37,6 +37,24 @@ services:
       MYSQL_PASSWORD: 12345
 ```
 ```
+mysql -u admin -p test_db < /backup/test_dump.sql
+
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_test_db |
++-------------------+
+| orders            |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM orders WHERE price > 300;
++----+----------------+-------+
+| id | title          | price |
++----+----------------+-------+
+|  2 | My little pony |   500 |
++----+----------------+-------+
+1 row in set (0.00 sec)
+
 
 ```
 
