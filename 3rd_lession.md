@@ -76,7 +76,19 @@ mysql> SELECT * FROM orders WHERE price > 300;
 Используя таблицу INFORMATION_SCHEMA.USER_ATTRIBUTES, получите данные по пользователю `test` и 
 **приведите в ответе к задаче**.
 
-```
+```SQL
+CREATE USER 'test'@'localhost' IDENTIFIED WITH mysql_native_password BY 'test-pass' PASSWORD REUSE INTERVAL 180 DAY;
+ALTER USER 'test'@'localhost' WITH MAX_QUERIES_PER_HOUR 100;
+ALTER USER 'test'@'localhost' FAILED_LOGIN_ATTEMPTS 3;
+ALTER USER 'test'@'localhost' ATTRIBUTE '{"NAME": "James", "SURNAME": "Pretty"}';
+
+mysql> SELECT * FROM INFORMATION_SCHEMA.USER_ATTRIBUTES WHERE User='test';
++------+-----------+----------------------------------------+
+| USER | HOST      | ATTRIBUTE                              |
++------+-----------+----------------------------------------+
+| test | localhost | {"NAME": "James", "SURNAME": "Pretty"} |
++------+-----------+----------------------------------------+
+1 row in set (0.00 sec)
 
 ```
 
