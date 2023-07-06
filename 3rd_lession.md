@@ -127,6 +127,7 @@ mysql> show profiles;
 
 
 ALTER TABLE test_db.orders ENGINE=MyISAM;
+select * from test_db.orders;
 
 mysql> show profiles;
 +----------+------------+------------------------------------------+
