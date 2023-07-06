@@ -176,7 +176,8 @@ innodb_flush_method = O_DIRECT
 tmpdir = /dev/shm
 table_cache = 4096
 table_definition_cache = 4096
-
+```
+```
 Неплохая статья по оптимизации:
 https://habr.com/ru/articles/539792/
 ```
