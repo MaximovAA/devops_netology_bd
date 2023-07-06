@@ -32,11 +32,11 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: 12345
-      MYSQL_DATABASE: stage
+      MYSQL_DATABASE: test_db
       MYSQL_USER: admin
       MYSQL_PASSWORD: 12345
 ```
-```
+```SQL
 mysql -u admin -p test_db < /backup/test_dump.sql
 
 mysql> SHOW TABLES;
