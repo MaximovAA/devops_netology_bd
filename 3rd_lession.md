@@ -127,6 +127,14 @@ mysql> show profiles;
 
 
 ALTER TABLE test_db.orders ENGINE=MyISAM;
+mysql> SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'test_db';
++--------+
+| ENGINE |
++--------+
+| MyISAM |
++--------+
+1 row in set (0.00 sec)
+
 select * from test_db.orders;
 
 mysql> show profiles;
