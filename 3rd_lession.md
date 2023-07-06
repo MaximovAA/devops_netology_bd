@@ -81,6 +81,7 @@ CREATE USER 'test'@'localhost' IDENTIFIED WITH mysql_native_password BY 'test-pa
 ALTER USER 'test'@'localhost' WITH MAX_QUERIES_PER_HOUR 100;
 ALTER USER 'test'@'localhost' FAILED_LOGIN_ATTEMPTS 3;
 ALTER USER 'test'@'localhost' ATTRIBUTE '{"NAME": "James", "SURNAME": "Pretty"}';
+GRANT SELECT ON `test_db`.* TO 'test'@'localhost';
 
 mysql> SELECT * FROM INFORMATION_SCHEMA.USER_ATTRIBUTES WHERE User='test';
 +------+-----------+----------------------------------------+
