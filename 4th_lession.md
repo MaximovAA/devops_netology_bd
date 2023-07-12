@@ -15,7 +15,11 @@
 - выхода из psql.
 
 ```
-
+\l
+\c
+\dp
+\dt+
+\q
 ```
 
 ## Задача 2
@@ -35,8 +39,27 @@
 
 **Приведите в ответе** команду, которую вы использовали для вычисления, и полученный результат.
 
-```
+```SQL
+psql -U admin -d test_database -f /backup/test_dump.sql;
 
+psql -U admin
+\connect test_database
+
+
+test_database=# SELECT MAX(avg_width) FROM pg_stats WHERE tablename='orders';
+ max
+-----
+  16
+(1 row)
+
+Смотрим все значения для проверки:
+test_database=# SELECT avg_width,attname FROM pg_stats WHERE tablename='orders';
+ avg_width | attname
+-----------+---------
+         4 | id
+        16 | title
+         4 | price
+(3 rows)
 ```
 
 ## Задача 3
