@@ -52,7 +52,7 @@ test_database=# SELECT MAX(avg_width) FROM pg_stats WHERE tablename='orders';
   16
 (1 row)
 
-Смотрим все значения для проверки:
+-- Смотрим все значения для проверки:
 test_database=# SELECT avg_width,attname FROM pg_stats WHERE tablename='orders';
  avg_width | attname
 -----------+---------
