@@ -73,8 +73,77 @@ SELECT avg_width,attname FROM pg_stats WHERE tablename='orders';
 Можно ли было изначально исключить ручное разбиение при проектировании таблицы orders?
 
 
-```
+```SQL
+test_database=# CREATE TABLE orders1 (CHECK ( price > 499)) INHERITS (orders);
+CREATE TABLE
+test_database=# CREATE TABLE orders2 (CHECK ( price <= 499)) INHERITS (orders);
+CREATE TABLE
+test_database=# INSERT INTO orders1 SELECT * FROM orders WHERE price > 499;
+INSERT 0 3
+test_database=# INSERT INTO orders2 SELECT * FROM orders WHERE price <= 499;
+INSERT 0 5
+select * from orders1;
+ id |       title        | price
+----+--------------------+-------
+  2 | My little database |   500
+  6 | WAL never lies     |   900
+  8 | Dbiezdmin          |   501
+(3 rows)
 
+ select * from orders2;
+ id |        title         | price
+----+----------------------+-------
+  1 | War and peace        |   100
+  3 | Adventure psql time  |   300
+  4 | Server gravity falls |   300
+  5 | Log gossips          |   123
+  7 | Me and my bash-pet   |   499
+(5 rows)
+
+-- Но в результате у нас значения дублируются с базовой таблицей:
+select * from orders;
+ id |        title         | price
+----+----------------------+-------
+  1 | War and peace        |   100
+  2 | My little database   |   500
+  3 | Adventure psql time  |   300
+  4 | Server gravity falls |   300
+  5 | Log gossips          |   123
+  6 | WAL never lies       |   900
+  7 | Me and my bash-pet   |   499
+  8 | Dbiezdmin            |   501
+  2 | My little database   |   500
+  6 | WAL never lies       |   900
+  8 | Dbiezdmin            |   501
+  1 | War and peace        |   100
+  3 | Adventure psql time  |   300
+  4 | Server gravity falls |   300
+  5 | Log gossips          |   123
+  7 | Me and my bash-pet   |   499
+(16 rows)
+
+-- Выполнив удаление данных только из orders мы получим желаемую консистентность:
+DELETE FROM ONLY orders WHERE price > 499;
+DELETE  FROM ONLY orders WHERE price <= 499;
+
+select * from orders;
+ id |        title         | price
+----+----------------------+-------
+  2 | My little database   |   500
+  6 | WAL never lies       |   900
+  8 | Dbiezdmin            |   501
+  1 | War and peace        |   100
+  3 | Adventure psql time  |   300
+  4 | Server gravity falls |   300
+  5 | Log gossips          |   123
+  7 | Me and my bash-pet   |   499
+(8 rows)
+
+При изначальном проектировании можно учесть распределение данных,
+но необходимо внимательно изучить условия распределения данных.
+```
+```
+Хорошая статья на тему https://habr.com/ru/companies/oleg-bunin/articles/309330/
 ```
 
 ## Задача 4
