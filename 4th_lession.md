@@ -153,6 +153,15 @@ select * from orders;
 Как бы вы доработали бэкап-файл, чтобы добавить уникальность значения столбца `title` для таблиц `test_database`?
 
 ```
+pg_dump -U admin test_database > /backup/test_dump.bak
+
+Для добавления уникальности необходимо в секции создания БД добавить признак unique для столбца `title`.
+
+CREATE TABLE public.orders (
+    id integer NOT NULL,
+    title character varying(80) NOT NULL,
+    price integer DEFAULT 0
+);
 
 ```
 
