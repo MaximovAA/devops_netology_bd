@@ -43,6 +43,7 @@ node.name: netology_test
 network.host: 0.0.0.0
 http.port: 9200
 xpack.security.enabled: false
+cluster.initial_master_nodes: ["netology_test"]
 
 Dockerfile:
 
