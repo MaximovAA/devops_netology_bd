@@ -72,7 +72,7 @@ services:
     volumes:
       elastic:
 
-http://192.168.10.24:9200/
+http://192.168.0.24:9200/
 
 name	"netology_test"
 cluster_name	"elasticsearch"
