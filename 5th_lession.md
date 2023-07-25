@@ -1,4 +1,4 @@
-## Задача 1
+it## Задача 1
 
 В этом задании вы потренируетесь в:
 
@@ -75,7 +75,7 @@ http://192.168.10.24:9200/
 
 name	"netology_test"
 cluster_name	"elasticsearch"
-cluster_uuid	"_na_"
+cluster_uuid	"Exo3nqJkT6KzKPAP7_kQlQ"
 version	
 number	"8.8.2"
 build_flavor	"default"
