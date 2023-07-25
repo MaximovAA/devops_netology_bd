@@ -34,9 +34,63 @@
 Далее мы будем работать с этим экземпляром Elasticsearch.
 
 ```
+В связи с недоступностью  прямого скачивания использовал проброс файлов эластика с хостовой машины.
+При необходимости можно в Dockerfile использовать echo "node.name: netology_test" >> /elasticsearch-8.8.2/config/elasticsearch.yml
+
+Основные параметры в конфиге:
+
+node.name: netology_test
+network.host: 0.0.0.0
+http.port: 9200
+xpack.security.enabled: false
+
+Dockerfile:
+
+FROM centos:7
+RUN useradd -U elastic
+RUN mkdir /elasticsearch-8.8.2
+RUN chown -R elastic:elastic /elasticsearch-8.8.2
+RUN mkdir /var/lib/nodes
+RUN chown -R elastic:elastic /var/lib/nodes
+
+docker-compose:
+
+services:
+  netology_test:
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - /home/amaksimov/elasticsearch-8.8.2:/elasticsearch-8.8.2
+    tty: true
+    environment:
+      ELASTIC_USERNAME: elasticsearch
+      ELASTIC_PASSWORD: 12345
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      elastic:
+
+http://192.168.10.24:9200/
+
+name	"netology_test"
+cluster_name	"elasticsearch"
+cluster_uuid	"_na_"
+version	
+number	"8.8.2"
+build_flavor	"default"
+build_type	"tar"
+build_hash	"98e1271edf932a480e4262a471281f1ee295ce6b"
+build_date	"2023-06-26T05:16:16.196344851Z"
+build_snapshot	false
+lucene_version	"9.6.0"
+minimum_wire_compatibility_version	"7.17.0"
+minimum_index_compatibility_version	"7.0.0"
+tagline	"You Know, for Search"
+
 
 ```
-
+https://hub.docker.com/layers/maximofaa/netologyvirt/netology_test/images/sha256-0dbe82f20fafcc89f18cfb23b4ddfe9a468cee2e87001602be6f75dfcd43cb6f?context=explore
 
 ## Задача 2
 
